@@ -4,12 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Document</title>
 </head>
 
-<body>
-
-    <ul class="gallery"></ul>
+<body class="boddy">
+    <div class="conteiner">
+        <ul class="gallery"></ul>
+    </div>
+    <!-- Модальное окно -->
+    <div class="modal" id="myModal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image" />
+        <div id="caption"></div>
+    </div>
     <script src="js/gallery.js"></script>
 </body>
 

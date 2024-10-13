@@ -46,33 +46,43 @@ const images = [
   },
 ];
 
-// Знаходимо контейнер для галереї
 const gallery = document.querySelector('.gallery');
 
-// Створюємо розмітку для кожного зображення
 const galleryMarkup = images
-  .map(({ preview, original, description }) => {
-    return `
-      <li class="gallery-item">
-        <a class="gallery-link" href="${original}">
-          <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}" />
-        </a>
-      </li>
-    `;
-  })
-  .join('');
+    .map(({ preview, original, description }) => {
+        return `
+            <li class="gallery-item">
+                <a class="gallery-link" href="${original}">
+                    <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}" />
+                </a>
+            </li>
+        `;
+    })
+    .join('');
 
-// Вставляємо всю розмітку за один раз
 gallery.innerHTML = galleryMarkup;
 
-// Додаємо подію на заборону стандартної поведінки (завантаження зображення)
-gallery.addEventListener('click', event => {
-  event.preventDefault(); // Забороняємо стандартну поведінку
-  const isImage = event.target.classList.contains('gallery-image');
-  
-  if (!isImage) return; // Якщо не клікнули на зображення, виходимо з функції
+const modal = document.getElementById("myModal");
+const modalImage = document.getElementById("modal-image");
+const span = document.getElementsByClassName("close")[0];
 
-  const largeImageUrl = event.target.dataset.source;
-  console.log('Велике зображення:', largeImageUrl);
-  // Додаємо функціонал для відкриття модального вікна з великим зображенням
+gallery.addEventListener('click', event => {
+    event.preventDefault(); 
+    const isImage = event.target.classList.contains('gallery-image');
+
+    if (!isImage) return;
+
+    const largeImageUrl = event.target.dataset.source;
+    modalImage.src = largeImageUrl; 
+    modal.style.display = "block"; 
 });
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
